@@ -19,15 +19,6 @@ const App = () => {
     searchMovies("family guy");
   }, []);
 
-  const movie = {
-    Title: "Family Guy",
-    Year: "1999–",
-    imdbID: "tt0182576",
-    Type: "series",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BODEwZjEzMjAtNjQxMy00Yjc4LWFlMDAtYjhjZTAxNDU3OTg3XkEyXkFqcGdeQXVyOTM2NTM4MjA@._V1_SX300.jpg",
-  };
-
   return (
     <div className="app">
       <h1>MovieLand</h1>
@@ -41,9 +32,17 @@ const App = () => {
         <img src={SearchIcon} alt="search" onClick={() => {}} />
       </div>
 
-      <div className="container">
-        <MovieCard movie={movies[0]} />
-      </div>
+      {movies?.length > 0 ? (
+        <div className="container">
+          {movies.map((movie) => (
+            <MovieCard movie={movie} />
+          ))}
+        </div>
+      ) : (
+        <div className="empty">
+          <h2>No Movies Found</h2>
+        </div>
+      )}
     </div>
   );
 };
