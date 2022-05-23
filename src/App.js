@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import MovieCard from "./MovieCard";
 import "./App.css";
 import SearchIcon from "./search.svg";
 
@@ -39,27 +40,7 @@ const App = () => {
       </div>
 
       <div className="container">
-        <div className="movie">
-          <div>
-            <p>{movie.Year}</p>
-          </div>
-
-          <div>
-            <img
-              src={
-                movie.Poster !== "N/A"
-                  ? movie.Poster
-                  : "https://via.placeholder.com/400"
-              }
-              alt={movie.Title}
-            />
-          </div>
-
-          <div>
-            <span>{movie.Type}</span>
-            <h3>{movie.Title}</h3>
-          </div>
-        </div>
+        <MovieCard movie={movie} />
       </div>
     </div>
   );
