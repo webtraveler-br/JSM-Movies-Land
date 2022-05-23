@@ -1,25 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
 
-function App() {
+import "./App.css";
+import SearchIcon from "./search.svg";
+
+const API_URL = "http://www.omdbapi.com?apikey=6a62d2f";
+
+const App = () => {
+  async function searchMovies(title) {
+    const response = await fetch(`${API_URL}&s=${title}`);
+    const data = await response.json();
+    console.log(data.Search);
+  }
+
+  useEffect(() => {
+    searchMovies("family guy");
+  }, []);
+
+  const movie = {
+    Title: "Family Guy",
+    Year: "1999–",
+    imdbID: "tt0182576",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BODEwZjEzMjAtNjQxMy00Yjc4LWFlMDAtYjhjZTAxNDU3OTg3XkEyXkFqcGdeQXVyOTM2NTM4MjA@._V1_SX300.jpg",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>MovieLand</h1>
+
+      <div className="search">
+        <input
+          placeholder="Search for movies"
+          value="superman"
+          onChange={() => {}}
+        />
+        <img src={SearchIcon} alt="search" onClick={() => {}} />
+      </div>
+
+      <div className="container">
+        <div className="movie">
+          <div>
+            <p>{movie.Year}</p>
+          </div>
+
+          <div>
+            <img
+              src={
+                movie.Poster !== "N/A"
+                  ? movie.Poster
+                  : "https://via.placeholder.com/400"
+              }
+              alt={movie.Title}
+            />
+          </div>
+
+          <div>
+            <span>{movie.Type}</span>
+            <h3>{movie.Title}</h3>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
